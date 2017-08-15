@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <fstream>
 #include<iostream>
+
 using namespace std;
 //// 这是导出变量的一个示例
 //ZHTDLL_API int nzhtDll=0;
@@ -134,17 +135,19 @@ public:
 	FUNPTR_CALLBACK fbackcall;
 	char localIP[16];
 	ACE_SOCK_CODgram udp;
+
 	ACE_SOCK_Dgram_Bcast serUdp;//(server_addr);
 	void setAddr()
 	{
 		ACE_INET_Addr controller_addr(controlPort,controlIP);
 
-		cout << controlIP << endl;
-		cout << controlPort << endl;
+		//cout << controlIP << endl;
+		//cout << controlPort << endl;
+
 		if (0 != udp.open(controller_addr))
 		{	
 			//return -1;
-			//cout << "请输入有效IP" << endl;
+	/*		cout << "请输入有效IP" << endl;*/
 		}
 	}
 	void setSerUdp(ACE_SOCK_Dgram_Bcast udp)
@@ -180,11 +183,11 @@ long getSnForControl(WGPacketShort pkt,int id)
 	pkt.Reset();
 	pkt.functionID = 0x94;
 	ret = pkt.run(MC[id].udp);
-	//log("获取设备号...");
+	log("获取设备号...");
 	if (ret > 0)
 	{		
 		controllerSN = (int)byteToLong(pkt.recv, 4, 4);		
-		//log("1.1 获取设备号.....controllerSN = ", controllerSN);
+		log("1.1 获取设备号.....controllerSN = ", controllerSN);
 		//get sn
 	}
 	return controllerSN;
@@ -198,16 +201,17 @@ ZHTDLL_API int __stdcall zht_InitPort(int id, int iPort, int gPort, char* Contro
 	int success = 0;  //0 失败, 1表示成功    
 	if (id > 10 || id < 0)
 	{
-		return -1;
+		return 0;
 	}
 	MC[id].pkt.ControllerPort = gPort;
 	MC[id].controlPort = gPort;
+	cout << gPort << endl;
 	memcpy(MC[id].controlIP, ControllerIP, strlen(ControllerIP));
 	MC[id].setAddr();
 	controllerSN = getSnForControl(MC[id].pkt,id);//223209404
 	if (controllerSN == 0)
 	{
-		return -1;
+		return 0;
 	}
 	MC[id].pkt.iDevSn = controllerSN;
 
@@ -331,7 +335,7 @@ int setRevIpandRevPort(WGPacketShort pkt , int id)  //接收服务器测试 -- 设置
 	{
 		if (pkt.recv[8] == 1)
 		{
-			log("1.18 设置接收服务器的IP和端口 	 成功...");
+			//cout << ("1.18 设置接收服务器的IP和端口 	 成功...") << endl;
 			success = 1;
 		}
 		else
@@ -346,19 +350,19 @@ int setRevIpandRevPort(WGPacketShort pkt , int id)  //接收服务器测试 -- 设置
 
 	ret = pkt.run(MC[id].udp);
 	success = 0;
-	log("1.19 读取接收服务器的IP和端口");
+	//cout << ("1.19 读取接收服务器的IP和端口") << endl;
 	if (ret >0)
 	{
 		if (((iwatchServerIPInfo >> 24) & 0xff) == pkt.recv[8] && ((iwatchServerIPInfo >> 16) & 0xff) == pkt.recv[9] && ((iwatchServerIPInfo >> 8) & 0xff) == pkt.recv[10] && ((iwatchServerIPInfo) & 0xff) == pkt.recv[11])
 		{
 			if (pkt.recv[12] == lPort && pkt.recv[13] == hPort)
 			{
-				log("1.19 读取接收服务器的IP和端口 	 成功...");
+				//cout <<("1.19 读取接收服务器的IP和端口 	 成功...") << endl;
 				success = 1;
 				return 0;
 			}
 		}
-		log("1.19 读取接收服务器的IP和端口 	 成功...");
+		//cout <<("1.19 读取接收服务器的IP和端口 	 失败...") << endl;
 		success = 1;
 	}
 	return -1;
@@ -406,10 +410,10 @@ int zht_WatchingServerRuning(char *watchServerIP, int watchServerPort,int id)
 	unsigned char buff[WGPacketShort::WGPacketSize];
 	size_t buflen = sizeof(buff);
 	ssize_t recv_cnt;
-	log("进入接收服务器监控状态....");
+	//cout << ("进入接收服务器监控状态....") << endl;	
 	unsigned int recordIndex = 0;
 	char root[200] = { 0 };
-	memset(root, '\0', 200);
+	memset(root, '\0', sizeof(root));
 	char temp[10];
 	while (true)
 	{
@@ -435,33 +439,29 @@ int zht_WatchingServerRuning(char *watchServerIP, int watchServerPort,int id)
 					*/
 					//接收到数据，根据ID值进行返回
 					memset(root, '\0', 200);
-
 					//TIME
 					char controllerTime[] = "2000.01.01 00:00:00"; //控制器当前时间
 					sprintf_s(controllerTime, "20%02X.%02X.%02X %02X:%02X:%02X",
 						buff[51], buff[52], buff[53], buff[37], buff[38], buff[39]);
-					toJson(root, "Time", controllerTime,0);
+					toJson(root, "Time", controllerTime,0);					
 					//ID
 					memset(temp, '\0', 10);
 					_itoa_s(id, temp, 10);
 					//sprintf(temp, "%d", id);
-					toJson(root, "nID", temp, 0);
-					
+					toJson(root, "nID", temp, 0);					
 					//14	门号(1,2,3,4)	1	
 					int recordDoorNO = buff[14];
 					memset(temp, '\0', 10);
 					_itoa_s(recordDoorNO, temp, 10);
 					//sprintf(temp, "%d", id);
-					toJson(root, "ChannelID", temp, 0);
-
+					toJson(root, "ChannelID", temp, 0);					
 					//16-19	卡号(类型是刷卡记录时)
 					//或编号(其他类型记录)	4	
 					int recordCardNO = 0;
-					memcpy(&recordCardNO, &(buff[16]), 4);
-					memset(temp, '\0', 10);
-					_itoa_s(recordCardNO, temp, 10);					
-					toJson(root, "UID", temp, 0);
-
+					memcpy(&recordCardNO, &(buff[16]), 4);					
+					memset(temp, '\0', 10);					
+					_itoa(recordCardNO, temp, 10);										
+					toJson(root, "UID", temp, 0);					
 
 					//15	进门/出门(1表示进门, 2表示出门)	1	0x01
 					int recordInOrOut = buff[15];
@@ -475,7 +475,6 @@ int zht_WatchingServerRuning(char *watchServerIP, int watchServerPort,int id)
 						memcpy(temp, "OUT", 3);
 					}
 					toJson(root, "direction", temp, 0);
-
 					//13	有效性(0 表示不通过, 1表示通过)	1	
 					int recordValid = buff[13];
 					memset(temp, '\0', 10);
@@ -489,7 +488,6 @@ int zht_WatchingServerRuning(char *watchServerIP, int watchServerPort,int id)
 					}
 					//json封装完成
 					MC[id].fbackcall(id, 1, root);
-					log(root);
 				}
 			}
 		}
@@ -611,6 +609,7 @@ ZHTDLL_API int __stdcall zht_SetCallbackAddr(int hComm, int id, FUNPTR_CALLBACK 
 	{
 		return -1;
 	}
+	//cout << "begin server" << endl;
 	memcpy(MC[id].localIP, localIP,strlen(localIP));
 	MC[id].fbackcall = callback;
 

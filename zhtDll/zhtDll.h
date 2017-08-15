@@ -20,8 +20,8 @@
 //extern ZHTDLL_API int nzhtDll;
 //
 //ZHTDLL_API int fnzhtDll(void);
-typedef void(*FUNPTR_CALLBACK)(int nID, int eventType, void* param);
-ZHTDLL_API int __stdcall t_AddtoWhitelist(int hComm, int id, char *cardid);
+ZHTDLL_API typedef void(*FUNPTR_CALLBACK)(int nID, int eventType, void* param);
+ZHTDLL_API int __stdcall zht_AddtoWhitelist(int hComm, int id, char *cardid);
 ZHTDLL_API int __stdcall zht_ClosePort(int hComm, int id);
 ZHTDLL_API int __stdcall zht_InitPort(int id, int iPort, int gPort, char* ControllerIP);
 ZHTDLL_API int __stdcall zht_SetCallbackAddr(int hComm, int id, FUNPTR_CALLBACK callback, char *localIP);
