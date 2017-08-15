@@ -1,0 +1,46 @@
+﻿生成启动时间为 2017/8/15 18:44:49。
+     1>项目“F:\wxccode\WGController32_VC\zhtDll\zhtDll\zhtDll.vcxproj”在节点 2 上(rebuild 个目标)。
+     1>_PrepareForClean:
+         正在删除文件“Debug\zhtDll.lastbuildstate”。
+       InitializeBuildStatus:
+         正在创建“Debug\zhtDll.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         E:\vs2010\VC\bin\CL.exe /c /IF:\opencv\build\include /IF:\opencv\build\include\opencv /IF:\opencv\build\include\opencv2 /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D ZHTDLL_EXPORTS /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\zhtDll.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         E:\vs2010\VC\bin\CL.exe /c /IF:\opencv\build\include /IF:\opencv\build\include\opencv /IF:\opencv\build\include\opencv2 /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D ZHTDLL_EXPORTS /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt dllmain.cpp
+         dllmain.cpp
+         E:\vs2010\VC\bin\CL.exe /c /IF:\opencv\build\include /IF:\opencv\build\include\opencv /IF:\opencv\build\include\opencv2 /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D ZHTDLL_EXPORTS /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\zhtDll.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt zhtDll.cpp
+         zhtDll.cpp
+     1>f:\wxccode\wgcontroller32_vc\zhtdll\zhtdll\zhtdll.cpp(376): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 e:\vs2010\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\wxccode\wgcontroller32_vc\zhtdll\zhtdll\zhtdll.cpp(393): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 e:\vs2010\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\wxccode\wgcontroller32_vc\zhtdll\zhtdll\zhtdll.cpp(395): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 e:\vs2010\vc\include\string.h(110) : 参见“strcat”的声明
+       ManifestResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\zhtDll.dll.embed.manifest.res" Debug\zhtDll_manifest.rc 
+       Link:
+         E:\vs2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\wxccode\WGController32_VC\zhtDll\Debug\zhtDll.dll" /INCREMENTAL /NOLOGO /LIBPATH:F:\googledown\opencv\build\x64\vc10\lib ACEd.lib iphlpapi.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\zhtDll.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"F:\wxccode\WGController32_VC\zhtDll\Debug\zhtDll.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\wxccode\WGController32_VC\zhtDll\Debug\zhtDll.lib" /MACHINE:X86 /DLL Debug\zhtDll.dll.embed.manifest.res
+         Debug\dllmain.obj
+         Debug\stdafx.obj
+         Debug\zhtDll.obj
+            正在创建库 F:\wxccode\WGController32_VC\zhtDll\Debug\zhtDll.lib 和对象 F:\wxccode\WGController32_VC\zhtDll\Debug\zhtDll.exp
+       Manifest:
+         正在删除文件“Debug\zhtDll.dll.embed.manifest”。
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\zhtDll.dll.embed.manifest" /manifest Debug\zhtDll.dll.intermediate.manifest
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\zhtDll.dll.embed.manifest.res" Debug\zhtDll_manifest.rc 
+       LinkEmbedManifest:
+         E:\vs2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\wxccode\WGController32_VC\zhtDll\Debug\zhtDll.dll" /INCREMENTAL /NOLOGO /LIBPATH:F:\googledown\opencv\build\x64\vc10\lib ACEd.lib iphlpapi.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\zhtDll.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"F:\wxccode\WGController32_VC\zhtDll\Debug\zhtDll.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\wxccode\WGController32_VC\zhtDll\Debug\zhtDll.lib" /MACHINE:X86 /DLL Debug\zhtDll.dll.embed.manifest.res
+         Debug\dllmain.obj
+         Debug\stdafx.obj
+         Debug\zhtDll.obj
+            正在创建库 F:\wxccode\WGController32_VC\zhtDll\Debug\zhtDll.lib 和对象 F:\wxccode\WGController32_VC\zhtDll\Debug\zhtDll.exp
+         zhtDll.vcxproj -> F:\wxccode\WGController32_VC\zhtDll\Debug\zhtDll.dll
+       FinalizeBuildStatus:
+         正在删除文件“Debug\zhtDll.unsuccessfulbuild”。
+         正在对“Debug\zhtDll.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“F:\wxccode\WGController32_VC\zhtDll\zhtDll\zhtDll.vcxproj”(rebuild 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:04.29
